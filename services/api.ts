@@ -8,6 +8,14 @@ export const api = axios.create({
   },
 });
 
+export const setAuthToken = (token: string | null) => {
+  if (token) {
+    api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  } else {
+    delete api.defaults.headers.common["Authorization"];
+  }
+};
+
 const handleError = (error: any): ApiResponse => {
   if (error.response) {
     return {
