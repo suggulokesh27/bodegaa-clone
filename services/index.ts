@@ -44,3 +44,10 @@ export const addToCartService = async (
     quantity,
   });
 };
+
+export const getHomeDataService = async () => {
+  return Promise.all([
+    getBestSellersService(),
+    getCategoryService(),
+  ]);
+};

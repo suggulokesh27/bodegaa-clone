@@ -18,7 +18,7 @@ export default function OtpScreen() {
   const [error, setError] = useState("");
 
   const router = useRouter();
-  const { setUser } = useAuth();
+  const { login } = useAuth();
 
   const handleVerifyOtp = async () => {
     const result = otpSchema.safeParse({ otp });
@@ -29,13 +29,11 @@ export default function OtpScreen() {
     }
 
     setLoading(true);
-console.log("Verifying OTP for:", phone, "OTP:", otp);
     const res = await verifyOtpService(String(phone), otp);
-
     setLoading(false);
 
     if (res.success) {
-      setUser(res.data);
+      login(res.data);
       router.replace("/");
     } else {
       alert(res.message);
